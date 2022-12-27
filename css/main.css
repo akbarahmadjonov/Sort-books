@@ -1,0 +1,19 @@
+.newDiv:hover {
+  background-color: #ebeaea;
+  transition: all 0.3s ease-in-out;
+}
+
+.newDiv {
+  width: 100%;
+  max-width: 350px;
+}
+
+.elimg {
+  width: 100%;
+  max-width: 250px;
+}
+
+.mode-img {
+  cursor: pointer;
+  width: 50px;
+}
