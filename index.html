@@ -16,14 +16,28 @@
 <body>
 
     <form class="js-form col-5 mx-auto mb-5">
-        <h1 class="mt-2 text-center">World Books <i class="fa-solid fa-book"></i> </h1>
+        <div class="d-flex mx-auto d-block">
+            <h1 id="ma" class="mt-2 text-center">World Books <i class="fa-solid fa-book"></i> </h1>
+            <img class="ms-3 mode-img ms-auto mode" src="./img/dark/dark-mode.svg" alt="Dark mode">
+        </div>
         <input class="form-control mt-4 js-input" type="search" placeholder="Search your books..." autofocus>
-        <div class="button-group mt-4"></div>
-        <button class="btn btn-outline-primary me-2 js-sort-name">Sort by: Name</button>
-        <button class="btn btn-outline-primary me-2 js-sort-year">Sort by: Year</button>
-        <button class="btn btn-outline-primary me-2 js-sort-page">Sort by: Page</button>
-        <button class="btn btn-outline-primary me-2 js-sort-language">Sort by: Language</button>
-        <img class="ms-3 mode-img" src="./img/dark/dark-mode.svg" alt="Dark mode">
+        <div class="mt-4"></div>
+        <select class="author-select col-3 form-select mb-3">
+            <option selected disabled>Sort by Author:</option>
+            <option value="all">All</option>
+        </select>
+        <select class="year-select col-3 form-select mb-3">
+            <option selected disabled>Sort by Year:</option>
+            <option value="all">All</option>
+        </select>
+        <select class="page-select col-3 form-select mb-3">
+            <option selected disabled>Sort by Page:</option>
+            <option value="all">All</option>
+        </select>
+        <select class="language-select col-3 form-select mb-3">
+            <option selected disabled>Sort by Language:</option>
+            <option value="all">All</option>
+        </select>
     </form>
     <h2 class="text-center d-none js-found">Nothing found, try again.</h2>
     <div class="container">
@@ -31,7 +45,9 @@
         </div>
     </div>
 
-
+    <h2 id="ma" class="text-center">Nothing found, use sort or try again.</h2>
+    <a href="#"><button class="btn btn-danger js-arrow d-none"><i
+                class="fa-sharp fa-solid fa-arrow-up fs-2"></i></button></a>
 
 
     <script src="./js/books.js"></script>

@@ -1,10 +1,45 @@
 const elRow = document.querySelector(".row");
 const elInput = document.querySelector(".js-input");
-const elSortName = document.querySelector(".js-sort-name");
-const elSortYear = document.querySelector(".js-sort-year");
-const elSortPage = document.querySelector(".js-sort-page");
-const elSortLanguage = document.querySelector(".js-sort-language");
 const elForm = document.querySelector(".js-form");
+// Selects
+const authorSelect = document.querySelector(".author-select");
+const yearSelect = document.querySelector(".year-select");
+const pageSelect = document.querySelector(".page-select");
+const languageSelect = document.querySelector(".language-select");
+// Selects
+const elArrowUp = document.querySelector(".js-arrow");
+const elModeBtn = document.querySelector(".mode");
+
+// Arrow up
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= 400) {
+    elArrowUp.classList.remove("d-none");
+  } else {
+    elArrowUp.classList.add("d-none");
+  }
+});
+// Arrow up
+
+// Dark mode
+let theme = false;
+elModeBtn.addEventListener("click", () => {
+  theme = !theme;
+
+  const bgTheme = theme ? "dark" : "light";
+  window.localStorage.setItem("theme", bgTheme);
+  changeTheme();
+});
+
+function changeTheme() {
+  if (window.localStorage.getItem('theme') == "dark") {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+}
+changeTheme();
+
+// Dark mode
 
 function renderBook(array, node) {
   node.innerHTML = "";
@@ -70,22 +105,118 @@ elForm.addEventListener("input", function (evt) {
   renderBook(newSearch, elRow);
 });
 //* Search
-
-let newAuthorSort = [];
-elSortName.addEventListener("click", function (evt) {
-  evt.preventDefault();
+authorSelect.addEventListener("change", function (evt) {
+  authorArr = [];
 
   books.forEach((element) => {
-    element.sort((a, b) => {
-      if (b.title > a.title) {
-        return -1;
-      }
-      if (a.title > b.title) {
-        return 1;
-      }
-      return 0;
-    });
-    newAuthorSort.push(sorted);
-    renderBook(newAuthorSort, elRow);
+    if (element.author.includes(authorSelect.value)) {
+      console.log(element);
+    }
   });
+});
+//* Search
+
+//* Author sort
+let authorSet = new Set();
+books.forEach((element) => {
+  authorSet.add(element.author);
+});
+authorSet.forEach((element) => {
+  let newOpt = document.createElement("option");
+  newOpt.setAttribute("value", element);
+  newOpt.textContent = element;
+  authorSelect.appendChild(newOpt);
+});
+
+//* Author change sort
+let authorArr = [];
+authorSelect.addEventListener("change", () => {
+  authorArr = [];
+  if (authorSelect.value !== "all") {
+    books.forEach((element) => {
+      if (element.author.includes(authorSelect.value)) {
+        authorArr.push(element);
+      }
+    });
+    renderBook(authorArr, elRow);
+  }
+});
+
+//* Year sort
+let yearSet = new Set();
+books.forEach((el) => {
+  yearSet.add(el.year);
+});
+
+yearSet.forEach((el) => {
+  let newOpt = document.createElement("option");
+  newOpt.setAttribute("class", el);
+  newOpt.textContent = el;
+  yearSelect.appendChild(newOpt);
+});
+
+//* Year change sort
+let yearArr = [];
+yearSelect.addEventListener("change", () => {
+  yearArr = [];
+  if (yearSelect.value !== "all") {
+    books.forEach((element) => {
+      if (element.year == yearSelect.value) {
+        yearArr.push(element);
+      }
+    });
+    renderBook(yearArr, elRow);
+  }
+});
+
+//* Page sort
+let pageSet = new Set();
+books.forEach((el) => {
+  pageSet.add(el.pages);
+});
+
+pageSet.forEach((el) => {
+  let newOpt = document.createElement("option");
+  newOpt.setAttribute("value", el);
+  newOpt.textContent = el;
+  pageSelect.appendChild(newOpt);
+});
+
+let pageArr = [];
+pageSelect.addEventListener("change", () => {
+  pageArr = [];
+  if (pageSelect.value !== "all") {
+    books.forEach((el) => {
+      if (el.pages == pageSelect.value) {
+        pageArr.push(el);
+      }
+    });
+    renderBook(pageArr, elRow);
+  }
+});
+
+//* Language sort
+let languageSet = new Set();
+books.forEach((el) => {
+  languageSet.add(el.language);
+});
+
+languageSet.forEach((el) => {
+  let newOpt = document.createElement("option");
+  newOpt.setAttribute("value", el);
+  newOpt.textContent = el;
+  languageSelect.appendChild(newOpt);
+});
+
+let languageArr = [];
+languageSelect.addEventListener("change", (evt) => {
+  languageArr = [];
+  if (languageSelect.value !== "all") {
+    books.map((element) => {
+      if (element.language.includes(languageSelect.value)) {
+        languageArr.push(element);
+      }
+    });
+    renderBook(languageArr, elRow);
+  }
 });

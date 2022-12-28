@@ -1,3 +1,29 @@
+:root {
+  --main-bg-color: #353935;
+  --main-color: #fff;
+  --main2-bg-color-hov: #ebeaea;
+  --main2-bg-color: #ebeaea;
+}
+
+.dark {
+  --main-bg-color: #fff;
+  --main-color: #000;
+  --main2-bg-color-hov: #ebeaea;
+  --main2-bg-color: #ebeaea;
+}
+
+body {
+  background-color: var(--main-bg-color);
+}
+
+#ma {
+  color: var(--main-color);
+}
+
+.newDiv {
+  background-color: var(--main2-bg-color-hov);
+}
+
 .newDiv:hover {
   background-color: #ebeaea;
   transition: all 0.3s ease-in-out;
@@ -16,4 +42,10 @@
 .mode-img {
   cursor: pointer;
   width: 50px;
+}
+
+.js-arrow {
+  position: fixed;
+  right: 20px;
+  bottom: 50px;
 }
